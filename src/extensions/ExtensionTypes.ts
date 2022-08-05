@@ -12,7 +12,7 @@ export enum ExtensionMarks {
 }
 
 export enum ExtensionHooks {
-  base = "base",
+  baseKeys = "baseKeys",
 }
 
 export enum ExtensionConverters {

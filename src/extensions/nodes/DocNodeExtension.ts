@@ -1,11 +1,8 @@
+import { NodeSpecContents, NodeSpecGroups } from "@core/model/nodes";
 import { NodeSpec } from "@core/prosemirror/model";
 import { Plugin } from "@core/prosemirror/state";
 import { Extension } from "@extensions/Extension";
-import {
-  ExtensionNodes,
-  ExtensionGroups,
-  ExtensionContents,
-} from "@extensions/ExtensionTypes";
+import { ExtensionNodes } from "@extensions/ExtensionTypes";
 
 export class DocNodeExtension extends Extension {
   name = ExtensionNodes.doc;
@@ -18,6 +15,6 @@ export class DocNodeExtension extends Extension {
 }
 
 const doc: NodeSpec = {
-  content: ExtensionContents["block+"],
-  group: ExtensionGroups.doc,
+  content: NodeSpecContents["block+"],
+  group: NodeSpecGroups.doc,
 };
