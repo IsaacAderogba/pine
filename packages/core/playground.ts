@@ -1,20 +1,20 @@
 import {
-  BaseKeysHookExtension,
-  DocNodeExtension,
-  HistoryHookExtension,
-  ParagraphNodeExtension,
+  baseKeysHookExtension,
+  docNodeExtension,
+  historyHookExtension,
+  paragraphNodeExtension,
   Pine,
-  TextNodeExtension,
+  textNodeExtension,
 } from "./src";
 
 const pine = new Pine();
 
-pine.registerExtension(new DocNodeExtension());
-pine.registerExtension(new ParagraphNodeExtension());
-pine.registerExtension(new TextNodeExtension());
+pine.registerExtension(docNodeExtension());
+pine.registerExtension(paragraphNodeExtension());
+pine.registerExtension(textNodeExtension());
 
-pine.registerExtension(new BaseKeysHookExtension());
-pine.registerExtension(new HistoryHookExtension());
+pine.registerExtension(baseKeysHookExtension());
+pine.registerExtension(historyHookExtension());
 
 const schema = pine.createSchema();
 const plugins = pine.createPlugins({ schema });

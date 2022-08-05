@@ -20,3 +20,7 @@ const paragraph: NodeSpec = {
   parseDOM: [{ tag: "p" }],
   toDOM: () => ["p", 0],
 };
+
+export const paragraphNodeExtension = (
+  ...params: ConstructorParameters<typeof ParagraphNodeExtension>
+) => new ParagraphNodeExtension(...params);

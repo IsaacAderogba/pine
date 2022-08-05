@@ -11,15 +11,30 @@ export {
 } from "./extensions/ExtensionTypes";
 
 // hook extensions
-export { BaseKeysHookExtension } from "./extensions/hooks/BaseKeysHookExtension";
+export {
+  BaseKeysHookExtension,
+  baseKeysHookExtension,
+} from "./extensions/hooks/BaseKeysHookExtension";
 export type { BaseKeysHookExtensionProps } from "./extensions/hooks/BaseKeysHookExtension";
-export { HistoryHookExtension } from "./extensions/hooks/HistoryHookExtension";
+export {
+  HistoryHookExtension,
+  historyHookExtension,
+} from "./extensions/hooks/HistoryHookExtension";
 export type { HistoryHookExtensionProps } from "./extensions/hooks/HistoryHookExtension";
 
 // node extensions
-export { DocNodeExtension } from "./extensions/nodes/DocNodeExtension";
+export {
+  DocNodeExtension,
+  docNodeExtension,
+} from "./extensions/nodes/DocNodeExtension";
 export type { DocNodeExtensionProps } from "./extensions/nodes/DocNodeExtension";
-export { ParagraphNodeExtension } from "./extensions/nodes/ParagraphNodeExtension";
+export {
+  ParagraphNodeExtension,
+  paragraphNodeExtension,
+} from "./extensions/nodes/ParagraphNodeExtension";
 export type { ParagraphNodeExtensionProps } from "./extensions/nodes/ParagraphNodeExtension";
-export { TextNodeExtension } from "./extensions/nodes/TextNodeExtension";
+export {
+  TextNodeExtension,
+  textNodeExtension,
+} from "./extensions/nodes/TextNodeExtension";
 export type { TextNodeExtensionProps } from "./extensions/nodes/TextNodeExtension";

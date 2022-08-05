@@ -19,3 +19,7 @@ const doc: NodeSpec = {
   content: NodeSpecContents["block+"],
   group: NodeSpecGroups.doc,
 };
+
+export const docNodeExtension = (
+  ...params: ConstructorParameters<typeof DocNodeExtension>
+) => new DocNodeExtension(...params);

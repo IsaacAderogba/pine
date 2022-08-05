@@ -18,3 +18,7 @@ const text: NodeSpec = {
   inline: true,
   group: NodeSpecGroups.inline,
 };
+
+export const textNodeExtension = (
+  ...params: ConstructorParameters<typeof TextNodeExtension>
+) => new TextNodeExtension(...params);

@@ -18,3 +18,7 @@ export class HistoryHookExtension extends Extension<HistoryHookExtensionProps> {
     ];
   };
 }
+
+export const historyHookExtension = (
+  ...params: ConstructorParameters<typeof HistoryHookExtension>
+) => new HistoryHookExtension(...params);

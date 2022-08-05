@@ -11,3 +11,7 @@ export class BaseKeysHookExtension extends Extension<BaseKeysHookExtensionProps>
     return [new KeymapPlugin(baseKeymap)];
   };
 }
+
+export const baseKeysHookExtension = (
+  ...params: ConstructorParameters<typeof BaseKeysHookExtension>
+) => new BaseKeysHookExtension(...params);
