@@ -12,6 +12,7 @@ export abstract class Extension<Props = any, Context = any> {
 
   config: ExtensionConfig;
   schemaSpec: ExtensionSchemaSpec = {};
+  
   constructor(props: Props, config: Partial<ExtensionConfig> = {}) {
     this.props = props;
     this.config = { addPlugins: () => [], ...config };
