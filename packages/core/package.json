@@ -1,0 +1,45 @@
+{
+  "name": "@pine/core",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsaacAderogba/pine.git"
+  },
+  "keywords": [],
+  "author": "Isaac Aderogba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IsaacAderogba/pine/issues"
+  },
+  "homepage": "https://github.com/IsaacAderogba/pine#readme",
+  "devDependencies": {
+    "@types/node": "^18.6.1",
+    "@types/uuid": "^8.3.4",
+    "module-alias": "^2.2.2",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.3",
+    "vite-plugin-dts": "^1.4.0",
+    "vite-tsconfig-paths": "^3.5.0",
+    "vitest": "^0.19.1"
+  },
+  "dependencies": {
+    "prosemirror-commands": "^1.3.0",
+    "prosemirror-history": "^1.3.0",
+    "prosemirror-keymap": "^1.2.0",
+    "prosemirror-model": "^1.18.1",
+    "prosemirror-state": "^1.4.1",
+    "prosemirror-transform": "^1.6.0",
+    "prosemirror-view": "^1.27.0",
+    "uuid": "^8.3.2"
+  }
+}

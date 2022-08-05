@@ -5,7 +5,7 @@ import {
   ParagraphNodeExtension,
   Pine,
   TextNodeExtension,
-} from "pine";
+} from "./src";
 
 const pine = new Pine();
 

@@ -9,7 +9,6 @@
     "baseUrl": ".",
     "outDir": "./dist",
     "paths": {
-      "pine": ["src"],
       "@context/*": ["src/context/*"],
       "@core/*": ["src/core/*"],
       "@extensions/*": ["src/extensions/*"],
