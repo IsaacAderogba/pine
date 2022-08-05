@@ -1,31 +1,24 @@
-import { Schema } from "prosemirror-model";
-import { Plugin, PluginSpec } from "prosemirror-state";
+import { Plugin } from "@core/prosemirror/state";
+import { Schema } from "@core/prosemirror/model";
 import { ExtensionSchemaSpec } from "./ExtensionTypes";
 
 export type ExtensionConfig = {
-  addPluginSpecs?: (props: {
-    schema: Schema;
-    extension: Extension;
-  }) => PluginSpec<unknown>[];
+  addPlugins: (props: { schema: Schema; extension: Extension }) => Plugin[];
 };
 
-export type ExtensionContext = any;
+export abstract class Extension<Props = any, Context = any> {
+  props: Props;
+  context?: Context;
 
-export abstract class Extension<
-  Config extends ExtensionConfig = ExtensionConfig,
-  Context extends ExtensionContext = ExtensionContext
-> {
-  public config: Config;
-  public context!: Context;
-
-  constructor(config: Config) {
-    this.config = config;
+  config: ExtensionConfig;
+  schemaSpec: ExtensionSchemaSpec = {};
+  constructor(props: Props, config: Partial<ExtensionConfig> = {}) {
+    this.props = props;
+    this.config = { addPlugins: () => [], ...config };
   }
 
   abstract name: string;
-  schemaSpec: ExtensionSchemaSpec = {};
-
-  plugins = (): Plugin[] => [];
+  abstract plugins: (params: { schema: Schema }) => Plugin[];
 
   bindContext(context: Context) {
     this.context = context;

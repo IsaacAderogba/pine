@@ -1,4 +1,4 @@
-import { MarkSpec, NodeSpec } from "prosemirror-model";
+import { MarkSpec, NodeSpec } from "@core/prosemirror/model";
 
 export enum ExtensionNodes {
   doc = "doc",
