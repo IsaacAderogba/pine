@@ -4,7 +4,7 @@ interface Events {
   [key: string]: (...args: any) => void;
 }
 
-export type EventApi<T extends Events> = T;
+export type EventsApi<T extends Events> = T;
 
 export class EventEmitter<T extends Events> {
   private listeners: { [name: string]: Set<Function> } = {};
