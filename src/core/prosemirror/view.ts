@@ -1,1 +1,1 @@
-export { EditorView } from "prosemirror-view";
+export { EditorView, DirectEditorProps } from "prosemirror-view";

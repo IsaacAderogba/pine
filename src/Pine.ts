@@ -4,7 +4,7 @@ import {
   Transaction,
   Plugin,
 } from "@core/prosemirror/state";
-import { EditorView } from "@core/prosemirror/view";
+import { DirectEditorProps, EditorView } from "@core/prosemirror/view";
 import { MarkSpec, NodeSpec, Schema } from "@core/prosemirror/model";
 
 import { EventEmitter, EventsApi } from "@core/utils/EventEmitter";
@@ -57,5 +57,36 @@ export class Pine extends EventEmitter<PineEvents> {
 
   public createState(config: EditorStateConfig) {
     return EditorState.create(config);
+  }
+
+  public renderView(
+    place: ConstructorParameters<typeof EditorView>[0],
+    props: Omit<DirectEditorProps, "dispatchTransaction">
+  ) {
+    const view = new EditorView(place, {
+      ...props,
+      dispatchTransaction: transaction => {
+        const state = view.state.apply(transaction);
+        view.updateState(state);
+
+        this.emit("docChanged", { state, transaction });
+      },
+    });
+
+    this.view = view;
+    this.emit("viewCreated", { view });
+  }
+
+  public reconfigureView() {
+    // todo
+  }
+
+  public destroy() {
+    this.destroyListeners();
+
+    this.view?.destroy();
+    this.view = undefined;
+
+    this.emit("destroyed");
   }
 }
