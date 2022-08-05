@@ -54,6 +54,7 @@
     ]
   },
   "dependencies": {
+    "prosemirror-keymap": "^1.2.0",
     "prosemirror-model": "^1.18.1",
     "prosemirror-state": "^1.4.1",
     "prosemirror-transform": "^1.6.0",
