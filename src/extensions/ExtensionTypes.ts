@@ -19,6 +19,11 @@ export enum ExtensionConverters {
   markdown = "markdown",
 }
 
+export enum ExtensionContents {
+  "block+" = "block+",
+  "inline*" = "inline*",
+}
+
 export enum ExtensionGroups {
   doc = "doc",
   block = "block",
