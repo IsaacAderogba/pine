@@ -1,8 +1,2 @@
-export {
-  Plugin,
-  PluginSpec,
-  EditorState,
-  EditorStateConfig,
-  Transaction,
-  Command
-} from "prosemirror-state";
+export type { PluginSpec, EditorStateConfig, Command } from "prosemirror-state";
+export { Plugin, EditorState, Transaction } from "prosemirror-state";

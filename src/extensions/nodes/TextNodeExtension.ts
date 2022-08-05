@@ -3,7 +3,8 @@ import { NodeSpec } from "@core/prosemirror/model";
 import { Extension } from "@extensions/Extension";
 import { ExtensionNodes } from "@extensions/ExtensionTypes";
 
-export class TextNodeExtension extends Extension {
+export type TextNodeExtensionProps = undefined;
+export class TextNodeExtension extends Extension<TextNodeExtensionProps> {
   name = ExtensionNodes.text;
 
   schemaSpec = { nodes: { text } };

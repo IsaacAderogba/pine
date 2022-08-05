@@ -3,7 +3,8 @@ import { KeymapPlugin } from "@core/keymap/KeymapPlugin";
 import { Extension } from "@extensions/Extension";
 import { ExtensionHooks } from "@extensions/ExtensionTypes";
 
-export class BaseKeysHookExtension extends Extension {
+export type BaseKeysHookExtensionProps = undefined;
+export class BaseKeysHookExtension extends Extension<BaseKeysHookExtensionProps> {
   name = ExtensionHooks.baseKeys;
 
   plugins: Extension["plugins"] = () => {

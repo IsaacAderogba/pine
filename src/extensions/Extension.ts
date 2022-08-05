@@ -6,15 +6,15 @@ export type ExtensionConfig = {
   addPlugins: (props: { schema: Schema; extension: Extension }) => Plugin[];
 };
 
-export abstract class Extension<Props = any, Context = any> {
+export abstract class Extension<Props = unknown, Context = unknown> {
   props: Props;
-  context?: Context;
+  context!: Context;
 
   config: ExtensionConfig;
   schemaSpec: ExtensionSchemaSpec = {};
   
-  constructor(props: Props, config: Partial<ExtensionConfig> = {}) {
-    this.props = props;
+  constructor(props?: Props, config: Partial<ExtensionConfig> = {}) {
+    this.props = props as Props;
     this.config = { addPlugins: () => [], ...config };
   }
 

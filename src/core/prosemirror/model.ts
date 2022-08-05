@@ -1,1 +1,2 @@
-export { MarkSpec, NodeSpec, Schema } from "prosemirror-model";
+export type { MarkSpec, NodeSpec } from "prosemirror-model";
+export { Schema } from "prosemirror-model";

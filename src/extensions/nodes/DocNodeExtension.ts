@@ -4,7 +4,8 @@ import { Plugin } from "@core/prosemirror/state";
 import { Extension } from "@extensions/Extension";
 import { ExtensionNodes } from "@extensions/ExtensionTypes";
 
-export class DocNodeExtension extends Extension {
+export type DocNodeExtensionProps = undefined;
+export class DocNodeExtension extends Extension<DocNodeExtensionProps> {
   name = ExtensionNodes.doc;
 
   schemaSpec = { nodes: { doc } };
