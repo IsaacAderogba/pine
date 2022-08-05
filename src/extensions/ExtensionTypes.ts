@@ -19,6 +19,12 @@ export enum ExtensionConverters {
   markdown = "markdown",
 }
 
+export enum ExtensionGroups {
+  doc = "doc",
+  block = "block",
+  inline = "inline",
+}
+
 export interface ExtensionSchemaSpec {
   nodes?: { [node: string]: NodeSpec };
   marks?: { [node: string]: MarkSpec };

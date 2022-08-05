@@ -1,6 +1,6 @@
 import { NodeSpec } from "@core/prosemirror/model";
 import { Extension } from "@extensions/Extension";
-import { ExtensionNodes } from "@extensions/ExtensionTypes";
+import { ExtensionGroups, ExtensionNodes } from "@extensions/ExtensionTypes";
 
 export class ParagraphNodeExtension extends Extension {
   name = ExtensionNodes.paragraph;
@@ -14,7 +14,7 @@ export class ParagraphNodeExtension extends Extension {
 
 const paragraph: NodeSpec = {
   content: "inline*",
-  group: "block",
+  group: ExtensionGroups.block,
   parseDOM: [{ tag: "p" }],
   toDOM: () => ["p", 0],
 };
