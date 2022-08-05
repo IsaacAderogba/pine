@@ -10,7 +10,9 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "rules": {},
+  "rules": {
+    "@typescript-eslint/ban-types": "off"
+  },
   "env": {
     "browser": true,
     "node": true

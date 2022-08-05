@@ -54,6 +54,10 @@
     ]
   },
   "dependencies": {
+    "prosemirror-model": "^1.18.1",
+    "prosemirror-state": "^1.4.1",
+    "prosemirror-transform": "^1.6.0",
+    "prosemirror-view": "^1.27.0",
     "uuid": "^8.3.2"
   }
 }
