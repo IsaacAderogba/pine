@@ -1,0 +1,59 @@
+{
+  "name": "pine",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint:staged": "lint-staged",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsaacAderogba/pine.git"
+  },
+  "keywords": [],
+  "author": "Isaac Aderogba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IsaacAderogba/pine/issues"
+  },
+  "homepage": "https://github.com/IsaacAderogba/pine#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-typescript": "^8.3.3",
+    "@types/node": "^18.6.1",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "module-alias": "^2.2.2",
+    "prettier": "^2.7.1",
+    "rollup-plugin-dts": "^4.2.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.3",
+    "vite-plugin-dts": "^1.4.0",
+    "vite-tsconfig-paths": "^3.5.0",
+    "vitest": "^0.19.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
