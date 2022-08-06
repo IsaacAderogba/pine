@@ -24,7 +24,7 @@ export class ElementView<T extends ElementViewProps = ElementViewProps>
   constructor(props: T) {
     this.props = props;
 
-    this.dom.classList.add(`${this.props.node.type.name}`, namespace("dom"));
+    this.dom.classList.add(namespace(`${this.props.node.type.name}-dom`));
     this.dom.appendChild(this.props.hooks.create(this));
 
     this.update();
