@@ -1,5 +1,6 @@
 import { Node } from "@core/prosemirror/model";
 import { EditorView, NodeView } from "@core/prosemirror/view";
+import { namespace } from "@core/utils/namespace";
 import { Extension } from "@extensions/Extension";
 
 export interface ElementViewProps<Context = unknown> {
@@ -8,8 +9,8 @@ export interface ElementViewProps<Context = unknown> {
   view: EditorView;
   hooks: {
     create: (elementView: ElementView) => HTMLElement;
-    update: (elementView: ElementView) => void;
-    destroy: (elementView: ElementView) => void;
+    update?: (elementView: ElementView) => void;
+    destroy?: (elementView: ElementView) => void;
   };
 }
 
@@ -23,7 +24,7 @@ export class ElementView<T extends ElementViewProps = ElementViewProps>
   constructor(props: T) {
     this.props = props;
 
-    this.dom.classList.add(`${this.props.node.type.name}`, "pine-dom");
+    this.dom.classList.add(`${this.props.node.type.name}`, namespace("dom"));
     this.dom.appendChild(this.props.hooks.create(this));
 
     this.update();
@@ -33,7 +34,7 @@ export class ElementView<T extends ElementViewProps = ElementViewProps>
     if (node.type !== this.props.node.type) return false;
     this.props.node = node;
 
-    this.props.hooks.update(this);
+    if (this.props.hooks.update) this.props.hooks.update(this);
     return true;
   }
 
@@ -44,6 +45,6 @@ export class ElementView<T extends ElementViewProps = ElementViewProps>
 
   destroy() {
     this.dom.remove();
-    this.props.hooks.destroy(this);
+    if (this.props.hooks.destroy) this.props.hooks.destroy(this);
   }
 }

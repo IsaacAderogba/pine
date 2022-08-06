@@ -6,7 +6,15 @@ import { ExtensionNodes } from "@extensions/ExtensionTypes";
 export interface TextNodeExtensionSpec extends ExtensionSpec {}
 export class TextNodeExtension extends Extension {
   name = ExtensionNodes.text;
-  schema = { nodes: { text } };
+
+  get schema() {
+    const text: NodeSpec = {
+      inline: true,
+      group: NodeSpecGroups.inline,
+    };
+
+    return { nodes: { text } };
+  }
 
   constructor(public spec: TextNodeExtensionSpec = {}) {
     super();
@@ -17,9 +25,6 @@ export class TextNodeExtension extends Extension {
   };
 }
 
-const text: NodeSpec = {
-  inline: true,
-  group: NodeSpecGroups.inline,
-};
+
 
 export const textNodeExtension = createExtension(TextNodeExtension);

@@ -5,12 +5,40 @@ import {
   paragraphNodeExtension,
   Pine,
   textNodeExtension,
+  Plugin,
+  ElementView,
 } from "./src";
 
 const pine = new Pine();
 
 pine.registerExtension(docNodeExtension());
-pine.registerExtension(paragraphNodeExtension());
+pine.registerExtension(
+  paragraphNodeExtension({
+    addPlugins: ({ extension }) => {
+      return [
+        new Plugin({
+          props: {
+            nodeViews: {
+              [extension.name]: (node, view) =>
+                new ElementView({
+                  node,
+                  view,
+                  extension,
+                  hooks: {
+                    create: el => {
+                      el.contentDOM = document.createElement("p");
+                      el.contentDOM.style.color = "red";
+                      return el.contentDOM;
+                    },
+                  },
+                }),
+            },
+          },
+        }),
+      ];
+    },
+  })
+);
 pine.registerExtension(textNodeExtension());
 
 pine.registerExtension(baseKeysHookExtension());

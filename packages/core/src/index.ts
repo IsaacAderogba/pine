@@ -1,5 +1,10 @@
 export { Pine } from "./Pine";
 
+// core
+export { Plugin } from "./core/prosemirror/state";
+export { ElementView } from "./core/view/ElementView";
+export type { ElementViewProps } from "./core/view/ElementView";
+
 // extensions
 export { Extension } from "./extensions/Extension";
 export type { ExtensionSpec } from "./extensions/Extension";
