@@ -17,8 +17,8 @@ export type PineEvents = EventsApi<{
 }>;
 
 export class Pine extends EventEmitter<PineEvents> {
-  extensions: Map<string, Extension> = new Map();
-  view?: EditorView;
+  private extensions: Map<string, Extension> = new Map();
+  private view?: EditorView;
 
   public registerExtension(extension: Extension) {
     this.extensions.set(extension.name, extension);
@@ -62,7 +62,7 @@ export class Pine extends EventEmitter<PineEvents> {
     return EditorState.create(config);
   }
 
-  public renderView(
+  public createView(
     place: ConstructorParameters<typeof EditorView>[0],
     props: Omit<DirectEditorProps, "dispatchTransaction">
   ) {
@@ -81,7 +81,10 @@ export class Pine extends EventEmitter<PineEvents> {
   }
 
   public reconfigureView() {
-    // todo
+    if (!this.view) throw new PineError("View must first be created.");
+    const plugins = this.createPlugins({ schema: this.view.state.schema });
+    const state = this.view.state.reconfigure({ plugins });
+    this.view.updateState(state);
   }
 
   public destroy() {
@@ -93,3 +96,5 @@ export class Pine extends EventEmitter<PineEvents> {
     this.emit("destroyed");
   }
 }
+
+class PineError extends Error {}
