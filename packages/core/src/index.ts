@@ -1,7 +1,7 @@
-export { Pine } from "./Pine";
+export { Pine, PineEvents, PineViewMount, PineViewProps } from "./Pine";
 
 // core
-export { Plugin } from "./core/prosemirror/state";
+export { Plugin, EditorState } from "./core/prosemirror/state";
 export { ElementView } from "./core/view/ElementView";
 export type { ElementViewProps } from "./core/view/ElementView";
 

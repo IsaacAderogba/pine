@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "outDir": "./dist",
+    "jsx": "react-jsx"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

@@ -10,15 +10,9 @@ import { MarkSpec, NodeSpec, Schema } from "@core/prosemirror/model";
 import { EventEmitter, EventsApi } from "@core/utils/EventEmitter";
 import { Extension } from "@extensions/Extension";
 
-export type PineEvents = EventsApi<{
-  docChanged: (data: { state: EditorState; transaction: Transaction }) => void;
-  viewCreated: (data: { view: EditorView }) => void;
-  destroyed: () => void;
-}>;
-
 export class Pine extends EventEmitter<PineEvents> {
   private extensions: Map<string, Extension> = new Map();
-  private view?: EditorView;
+  public view?: EditorView;
 
   public registerExtension(extension: Extension) {
     this.extensions.set(extension.name, extension);
@@ -62,11 +56,8 @@ export class Pine extends EventEmitter<PineEvents> {
     return EditorState.create(config);
   }
 
-  public createView(
-    place: ConstructorParameters<typeof EditorView>[0],
-    props: Omit<DirectEditorProps, "dispatchTransaction">
-  ) {
-    const view = new EditorView(place, {
+  public createView(mount: PineViewMount, props: PineViewProps) {
+    const view = new EditorView(mount, {
       ...props,
       dispatchTransaction: transaction => {
         const state = view.state.apply(transaction);
@@ -81,20 +72,30 @@ export class Pine extends EventEmitter<PineEvents> {
   }
 
   public reconfigureView() {
-    if (!this.view) throw new PineError("View must first be created.");
+    if (!this.view) return;
+
     const plugins = this.createPlugins({ schema: this.view.state.schema });
     const state = this.view.state.reconfigure({ plugins });
     this.view.updateState(state);
   }
 
   public destroy() {
-    this.destroyListeners();
-
-    this.view?.destroy();
+    if (this.view) this.view.destroy();
     this.view = undefined;
 
     this.emit("destroyed");
+    this.destroyListeners();
   }
 }
 
-class PineError extends Error {}
+export type PineEvents = EventsApi<{
+  docChanged: (data: { state: EditorState; transaction: Transaction }) => void;
+  viewCreated: (data: { view: EditorView }) => void;
+  destroyed: () => void;
+}>;
+
+export type PineViewMount = ConstructorParameters<typeof EditorView>[0];
+export type PineViewProps = Omit<
+  DirectEditorProps,
+  "dispatchTransaction" | "plugins"
+>;
