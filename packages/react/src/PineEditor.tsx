@@ -5,7 +5,6 @@ import React, {
   useRef,
   useReducer,
   DependencyList,
-  useMemo,
   useCallback,
   useState,
 } from "react";
@@ -41,6 +40,7 @@ export const PineEditor: React.FC<PineEditorProps> = ({
       { handleClick: () => renderEditor(), ...props }
     );
 
+    pine.on("viewCreated", () => renderEditor());
     pine.on("docChanged", () => renderEditor());
 
     return () => portalsContext.clear();
@@ -50,14 +50,14 @@ export const PineEditor: React.FC<PineEditorProps> = ({
     <Context.Provider value={{ pine, portals: portalsContext }}>
       <div ref={editorViewRef} />
       {portals}
-      {children}
+      {pine.view ? children : null}
     </Context.Provider>
   );
 };
 
-export const usePineEditor = () => {
+export const useEditor = () => {
   const context = useContext(Context);
-  if (!context) throw new Error("usePineEditor must be used within PineEditor");
+  if (!context) throw new Error("useEditor must be used within PineEditor");
   return context;
 };
 
@@ -68,11 +68,12 @@ export const usePine = (props: PineOptions, deps: DependencyList = []) => {
     const { on = {}, extensions = [] } = props;
 
     const pine = new Pine();
+    extensions.forEach(ext => pine.registerExtension(ext));
+
     const schema = pine.createSchema();
     const plugins = pine.createPlugins({ schema });
     const state = pine.createState({ schema, plugins });
 
-    extensions.forEach(ext => pine.registerExtension(ext));
     Object.entries(on).map(([e, cb]) => pine.on(e as keyof PineEvents, cb));
 
     return { pine, state };

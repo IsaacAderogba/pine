@@ -1,9 +1,8 @@
 import path from "path";
 import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
-import tsconfigPaths from "vite-tsconfig-paths";
+import react from "@vitejs/plugin-react";
 
-module.exports = defineConfig({
+export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
@@ -12,5 +11,5 @@ module.exports = defineConfig({
       formats: ["es", "cjs"],
     },
   },
-  plugins: [tsconfigPaths(), dts()],
+  plugins: [react()],
 });
