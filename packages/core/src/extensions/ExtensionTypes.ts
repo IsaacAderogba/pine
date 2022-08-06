@@ -20,7 +20,7 @@ export enum ExtensionConverters {
   markdown = "markdown",
 }
 
-export interface ExtensionSchemaSpec {
+export interface ExtensionSchema {
   nodes?: { [node: string]: NodeSpec };
   marks?: { [node: string]: MarkSpec };
 }

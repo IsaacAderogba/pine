@@ -1,12 +1,16 @@
 import { KeymapPlugin } from "@core/keymap/KeymapPlugin";
 import { history, redo, undo } from "@core/prosemirror/history";
 import { isMac } from "@core/utils/browser";
-import { Extension } from "@extensions/Extension";
+import { createExtension, Extension, ExtensionSpec } from "@extensions/Extension";
 import { ExtensionHooks } from "@extensions/ExtensionTypes";
 
-export type HistoryHookExtensionProps = undefined;
-export class HistoryHookExtension extends Extension<HistoryHookExtensionProps> {
+export interface HistoryHookExtensionSpec extends ExtensionSpec {}
+export class HistoryHookExtension extends Extension {
   name = ExtensionHooks.history;
+
+  constructor(public spec: HistoryHookExtensionSpec = {}) {
+    super();
+  }
 
   plugins: Extension["plugins"] = () => {
     return [
@@ -19,6 +23,4 @@ export class HistoryHookExtension extends Extension<HistoryHookExtensionProps> {
   };
 }
 
-export const historyHookExtension = (
-  ...params: ConstructorParameters<typeof HistoryHookExtension>
-) => new HistoryHookExtension(...params);
+export const historyHookExtension = createExtension(HistoryHookExtension);

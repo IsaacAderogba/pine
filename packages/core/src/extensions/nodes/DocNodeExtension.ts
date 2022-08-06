@@ -1,14 +1,21 @@
 import { NodeSpecContents, NodeSpecGroups } from "@core/model/nodes";
 import { NodeSpec } from "@core/prosemirror/model";
 import { Plugin } from "@core/prosemirror/state";
-import { Extension } from "@extensions/Extension";
+import {
+  createExtension,
+  Extension,
+  ExtensionSpec,
+} from "@extensions/Extension";
 import { ExtensionNodes } from "@extensions/ExtensionTypes";
 
-export type DocNodeExtensionProps = undefined;
-export class DocNodeExtension extends Extension<DocNodeExtensionProps> {
+export interface DocNodeExtensionSpec extends ExtensionSpec {}
+export class DocNodeExtension extends Extension {
   name = ExtensionNodes.doc;
+  schema = { nodes: { doc } };
 
-  schemaSpec = { nodes: { doc } };
+  constructor(public spec: DocNodeExtensionSpec = {}) {
+    super();
+  }
 
   plugins: Extension["plugins"] = () => {
     return [new Plugin({ props: { attributes: { class: "pine-doc" } } })];
@@ -20,6 +27,4 @@ const doc: NodeSpec = {
   group: NodeSpecGroups.doc,
 };
 
-export const docNodeExtension = (
-  ...params: ConstructorParameters<typeof DocNodeExtension>
-) => new DocNodeExtension(...params);
+export const docNodeExtension = createExtension(DocNodeExtension);

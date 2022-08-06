@@ -1,13 +1,16 @@
 import { NodeSpecContents, NodeSpecGroups } from "@core/model/nodes";
 import { NodeSpec } from "@core/prosemirror/model";
-import { Extension } from "@extensions/Extension";
+import { createExtension, Extension, ExtensionSpec } from "@extensions/Extension";
 import { ExtensionNodes } from "@extensions/ExtensionTypes";
 
-export type ParagraphNodeExtensionProps = undefined;
-export class ParagraphNodeExtension extends Extension<ParagraphNodeExtensionProps> {
+export interface ParagraphNodeExtensionSpec extends ExtensionSpec {}
+export class ParagraphNodeExtension extends Extension {
   name = ExtensionNodes.paragraph;
+  schema = { nodes: { paragraph } };
 
-  schemaSpec = { nodes: { paragraph } };
+  constructor(public spec: ParagraphNodeExtensionSpec = {}) {
+    super();
+  }
 
   plugins: Extension["plugins"] = () => {
     return [];
@@ -21,6 +24,4 @@ const paragraph: NodeSpec = {
   toDOM: () => ["p", 0],
 };
 
-export const paragraphNodeExtension = (
-  ...params: ConstructorParameters<typeof ParagraphNodeExtension>
-) => new ParagraphNodeExtension(...params);
+export const paragraphNodeExtension = createExtension(ParagraphNodeExtension);

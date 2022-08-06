@@ -1,13 +1,16 @@
 import { NodeSpecGroups } from "@core/model/nodes";
 import { NodeSpec } from "@core/prosemirror/model";
-import { Extension } from "@extensions/Extension";
+import { createExtension, Extension, ExtensionSpec } from "@extensions/Extension";
 import { ExtensionNodes } from "@extensions/ExtensionTypes";
 
-export type TextNodeExtensionProps = undefined;
-export class TextNodeExtension extends Extension<TextNodeExtensionProps> {
+export interface TextNodeExtensionSpec extends ExtensionSpec {}
+export class TextNodeExtension extends Extension {
   name = ExtensionNodes.text;
+  schema = { nodes: { text } };
 
-  schemaSpec = { nodes: { text } };
+  constructor(public spec: TextNodeExtensionSpec = {}) {
+    super();
+  }
 
   plugins: Extension["plugins"] = () => {
     return [];
@@ -19,6 +22,4 @@ const text: NodeSpec = {
   group: NodeSpecGroups.inline,
 };
 
-export const textNodeExtension = (
-  ...params: ConstructorParameters<typeof TextNodeExtension>
-) => new TextNodeExtension(...params);
+export const textNodeExtension = createExtension(TextNodeExtension);

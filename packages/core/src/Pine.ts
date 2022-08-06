@@ -30,13 +30,13 @@ export class Pine extends EventEmitter<PineEvents> {
 
   public createSchema() {
     let nodes: { [key: string]: NodeSpec } = {};
-    this.extensions.forEach(({ schemaSpec }) => {
-      nodes = { ...nodes, ...schemaSpec?.nodes };
+    this.extensions.forEach(({ schema }) => {
+      nodes = { ...nodes, ...schema?.nodes };
     });
 
     let marks: { [key: string]: MarkSpec } = {};
-    this.extensions.forEach(({ schemaSpec }) => {
-      marks = { ...marks, ...schemaSpec?.marks };
+    this.extensions.forEach(({ schema }) => {
+      marks = { ...marks, ...schema?.marks };
     });
 
     return new Schema({ nodes, marks });
@@ -47,9 +47,12 @@ export class Pine extends EventEmitter<PineEvents> {
 
     this.extensions.forEach(ext => {
       const staticPlugins = ext.plugins({ schema });
-      const dynamicPlugins = ext.config.addPlugins({ schema, extension: ext });
+      plugins.push(...staticPlugins);
 
-      plugins.push(...staticPlugins, ...dynamicPlugins);
+      if (ext.spec.addPlugins) {
+        const dynamicPlugins = ext.spec.addPlugins({ schema, extension: ext });
+        plugins.push(...dynamicPlugins);
+      }
     });
 
     return plugins;
