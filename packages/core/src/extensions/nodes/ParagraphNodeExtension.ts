@@ -8,23 +8,29 @@ import {
 } from "@extensions/Extension";
 import { ExtensionNodes } from "@extensions/ExtensionTypes";
 
-export interface ParagraphNodeExtensionSpec extends ExtensionSpec {}
+export interface ParagraphNodeExtensionSpec extends ExtensionSpec {
+  className: string;
+}
+
 export class ParagraphNodeExtension extends Extension {
   name = ExtensionNodes.paragraph;
+  spec: ParagraphNodeExtensionSpec;
 
   get schema() {
     const paragraph: NodeSpec = {
       content: NodeSpecContents["inline*"],
       group: NodeSpecGroups.block,
       parseDOM: [{ tag: "p" }],
-      toDOM: () => ["p", { class: namespace(this.name) }, 0],
+      toDOM: () => ["p", { class: this.spec.className }, 0],
     };
 
     return { nodes: { paragraph } };
   }
 
-  constructor(public spec: ParagraphNodeExtensionSpec = {}) {
+  constructor(spec: Partial<ParagraphNodeExtensionSpec> = {}) {
     super();
+
+    this.spec = { className: namespace(this.name), ...spec };
   }
 
   plugins: Extension["plugins"] = () => {

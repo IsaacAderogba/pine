@@ -11,7 +11,7 @@ import {
 
 const pine = new Pine();
 
-pine.registerExtension(docNodeExtension());
+pine.registerExtension(docNodeExtension({ className: "pm-doc" }));
 pine.registerExtension(
   paragraphNodeExtension({
     addPlugins: ({ extension }) => {

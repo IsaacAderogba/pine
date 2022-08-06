@@ -9,9 +9,13 @@ import {
 } from "@extensions/Extension";
 import { ExtensionNodes } from "@extensions/ExtensionTypes";
 
-export interface DocNodeExtensionSpec extends ExtensionSpec {}
+export interface DocNodeExtensionSpec extends ExtensionSpec {
+  className: string;
+}
+
 export class DocNodeExtension extends Extension {
   name = ExtensionNodes.doc;
+  spec: DocNodeExtensionSpec;
 
   get schema() {
     const doc: NodeSpec = {
@@ -22,13 +26,15 @@ export class DocNodeExtension extends Extension {
     return { nodes: { doc } };
   }
 
-  constructor(public spec: DocNodeExtensionSpec = {}) {
+  constructor(spec: Partial<DocNodeExtensionSpec> = {}) {
     super();
+
+    this.spec = { className: namespace(this.name), ...spec };
   }
 
   plugins: Extension["plugins"] = () => {
     return [
-      new Plugin({ props: { attributes: { class: namespace(this.name) } } }),
+      new Plugin({ props: { attributes: { class: this.spec.className } } }),
     ];
   };
 }
