@@ -33,8 +33,8 @@ export class ParagraphNodeExtension extends Extension {
     this.spec = { className: namespace(this.name), ...spec };
   }
 
-  plugins: Extension["plugins"] = () => {
-    return [];
+  initPlugins: Extension["initPlugins"] = ({ schema }) => {
+    return super.initPlugins({ schema });
   };
 }
 

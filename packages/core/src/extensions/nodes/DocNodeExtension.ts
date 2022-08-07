@@ -32,8 +32,9 @@ export class DocNodeExtension extends Extension {
     this.spec = { className: namespace(this.name), ...spec };
   }
 
-  plugins: Extension["plugins"] = () => {
+  initPlugins: Extension["initPlugins"] = ({ schema }) => {
     return [
+      ...super.initPlugins({ schema }),
       new Plugin({ props: { attributes: { class: this.spec.className } } }),
     ];
   };

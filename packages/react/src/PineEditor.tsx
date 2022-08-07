@@ -35,7 +35,7 @@ export const PineEditor: React.FC<PineEditorProps> = ({
   useEffect(() => {
     if (!editorViewRef.current) return;
 
-    pine.createView(
+    pine.renderView(
       { mount: editorViewRef.current },
       { handleClick: () => renderEditor(), ...props }
     );

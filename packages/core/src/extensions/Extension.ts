@@ -7,16 +7,19 @@ export interface ExtensionSpec {
 }
 
 export abstract class Extension<Context = unknown> {
+  context!: Context;
   spec: ExtensionSpec = {};
 
   abstract name: string;
-  abstract plugins: (params: { schema: Schema }) => Plugin[];
-
   get schema(): ExtensionSchema {
     return {};
   }
 
-  context!: Context;
+  initPlugins({ schema }: { schema: Schema }): Plugin[] {
+    if (!this.spec.addPlugins) return [];
+    return this.spec.addPlugins({ schema, extension: this });
+  }
+
   bindContext(context: Context) {
     this.context = context;
   }

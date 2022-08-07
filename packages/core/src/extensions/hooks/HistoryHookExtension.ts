@@ -1,7 +1,11 @@
 import { KeymapPlugin } from "@core/keymap/KeymapPlugin";
 import { history, redo, undo } from "@core/prosemirror/history";
 import { isMac } from "@core/utils/browser";
-import { createExtension, Extension, ExtensionSpec } from "@extensions/Extension";
+import {
+  createExtension,
+  Extension,
+  ExtensionSpec,
+} from "@extensions/Extension";
 import { ExtensionHooks } from "@extensions/ExtensionTypes";
 
 export interface HistoryHookExtensionSpec extends ExtensionSpec {}
@@ -12,8 +16,9 @@ export class HistoryHookExtension extends Extension {
     super();
   }
 
-  plugins: Extension["plugins"] = () => {
+  initPlugins: Extension["initPlugins"] = ({ schema }) => {
     return [
+      ...super.initPlugins({ schema }),
       history(),
       new KeymapPlugin({
         "Mod-z": undo,

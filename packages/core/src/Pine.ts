@@ -22,6 +22,10 @@ export class Pine extends EventEmitter<PineEvents> {
     this.extensions.delete(extension.name);
   }
 
+  public getExtension<T extends Extension>(name: T["name"]): T | undefined {
+    return this.extensions.get(name) as T;
+  }
+
   public createSchema() {
     let nodes: { [key: string]: NodeSpec } = {};
     this.extensions.forEach(({ schema }) => {
@@ -40,13 +44,7 @@ export class Pine extends EventEmitter<PineEvents> {
     const plugins: Plugin[] = [];
 
     this.extensions.forEach(ext => {
-      const staticPlugins = ext.plugins({ schema });
-      plugins.push(...staticPlugins);
-
-      if (ext.spec.addPlugins) {
-        const dynamicPlugins = ext.spec.addPlugins({ schema, extension: ext });
-        plugins.push(...dynamicPlugins);
-      }
+      plugins.push(...ext.initPlugins({ schema }));
     });
 
     return plugins;
@@ -56,7 +54,7 @@ export class Pine extends EventEmitter<PineEvents> {
     return EditorState.create(config);
   }
 
-  public createView(mount: PineViewMount, props: PineViewProps) {
+  public renderView(mount: PineViewMount, props: PineViewProps) {
     const view = new EditorView(mount, {
       ...props,
       dispatchTransaction: transaction => {
@@ -69,6 +67,7 @@ export class Pine extends EventEmitter<PineEvents> {
 
     this.view = view;
     this.emit("viewCreated", { view });
+    return view;
   }
 
   public reconfigureView() {

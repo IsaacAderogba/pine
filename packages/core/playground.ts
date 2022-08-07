@@ -3,13 +3,17 @@ import {
   docNodeExtension,
   historyHookExtension,
   paragraphNodeExtension,
+  domConverterExtension,
   Pine,
   textNodeExtension,
   Plugin,
   ElementView,
+  DomConverterExtension,
 } from "./src";
 
 const pine = new Pine();
+
+pine.registerExtension(domConverterExtension());
 
 pine.registerExtension(docNodeExtension({ className: "pm-doc" }));
 pine.registerExtension(paragraphNodeExtension());
@@ -23,7 +27,13 @@ const plugins = pine.createPlugins({ schema });
 const state = pine.createState({ schema, plugins });
 
 const element = document.querySelector("#playground");
-pine.createView(element, { state });
+pine.renderView(element, { state });
+
+const domConverter = pine.getExtension<DomConverterExtension>("dom");
+if (domConverter) {
+  const out = domConverter.serialize(state.doc.content);
+  console.log(out);
+}
 
 setTimeout(() => {
   pine.registerExtension(

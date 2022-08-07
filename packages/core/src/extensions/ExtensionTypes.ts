@@ -1,24 +1,25 @@
 import { MarkSpec, NodeSpec } from "@core/prosemirror/model";
 
-export enum ExtensionNodes {
-  doc = "doc",
-  paragraph = "paragraph",
-  text = "text",
-}
+export const ExtensionNodes = {
+  doc: "doc",
+  paragraph: "paragraph",
+  text: "text",
+} as const;
 
-export enum ExtensionMarks {
-  strong = "strong",
-  em = "em",
-}
+export const ExtensionMarks = {
+  strong: "strong",
+  em: "em",
+} as const;
 
-export enum ExtensionHooks {
-  baseKeys = "baseKeys",
-  history = "history",
-}
+export const ExtensionHooks = {
+  baseKeys: "baseKeys",
+  history: "history",
+} as const;
 
-export enum ExtensionConverters {
-  markdown = "markdown",
-}
+export const ExtensionConverters = {
+  markdown: "markdown",
+  dom: "dom",
+} as const;
 
 export interface ExtensionSchema {
   nodes?: { [node: string]: NodeSpec };

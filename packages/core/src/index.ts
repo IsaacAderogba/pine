@@ -1,4 +1,5 @@
-export { Pine, PineEvents, PineViewMount, PineViewProps } from "./Pine";
+export type { PineEvents, PineViewMount, PineViewProps } from "./Pine";
+export { Pine } from "./Pine";
 
 // core
 export { Plugin, EditorState } from "./core/prosemirror/state";
@@ -14,6 +15,13 @@ export {
   ExtensionHooks,
   ExtensionConverters,
 } from "./extensions/ExtensionTypes";
+
+// converter extensions
+export {
+  domConverterExtension,
+  DomConverterExtension,
+} from "./extensions/converters/DOMConverterExtension";
+export type { DomConverterExtensionSpec } from "./extensions/converters/DOMConverterExtension";
 
 // hook extensions
 export {
