@@ -3,11 +3,15 @@ export { Pine } from "./Pine";
 
 // core
 export { Plugin, EditorState } from "./core/prosemirror/state";
+export { NodeSpec, MarkSpec } from "./core/prosemirror/model";
 export { ElementView } from "./core/view/ElementView";
 export type { ElementViewProps } from "./core/view/ElementView";
+export { NodeSpecContents, NodeSpecGroups } from "./core/model/nodes";
+export { MarkSpecGroups } from "./core/model/marks";
+
 
 // extensions
-export { Extension } from "./extensions/Extension";
+export { Extension, createExtension } from "./extensions/Extension";
 export type { ExtensionSpec } from "./extensions/Extension";
 export {
   ExtensionNodes,
