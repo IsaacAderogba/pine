@@ -35,6 +35,13 @@ export {
 } from "./extensions/hooks/HistoryHookExtension";
 export type { HistoryHookExtensionSpec } from "./extensions/hooks/HistoryHookExtension";
 
+// mark extensions
+export {
+  StrongMarkExtension,
+  strongMarkExtension,
+} from "./extensions/marks/StrongMarkExtension";
+export type { StrongMarkExtensionSpec } from "./extensions/marks/StrongMarkExtension";
+
 // node extensions
 export {
   DocNodeExtension,

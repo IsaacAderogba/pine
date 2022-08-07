@@ -30,10 +30,8 @@ const element = document.querySelector("#playground");
 pine.renderView(element, { state });
 
 const domConverter = pine.getExtension<DomConverterExtension>("dom");
-if (domConverter) {
-  const out = domConverter.serialize(state.doc.content);
-  console.log(out);
-}
+const out = domConverter.serialize(state.doc.content);
+console.log(out);
 
 setTimeout(() => {
   pine.registerExtension(
@@ -64,5 +62,5 @@ setTimeout(() => {
     })
   );
 
-  pine.reconfigureView();
+  pine.reconfigure();
 }, 5000);

@@ -22,7 +22,7 @@ export class Pine extends EventEmitter<PineEvents> {
     this.extensions.delete(extension.name);
   }
 
-  public getExtension<T extends Extension>(name: T["name"]): T | undefined {
+  public getExtension<T extends Extension>(name: T["name"]) {
     return this.extensions.get(name) as T;
   }
 
@@ -70,7 +70,7 @@ export class Pine extends EventEmitter<PineEvents> {
     return view;
   }
 
-  public reconfigureView() {
+  public reconfigure() {
     if (!this.view) return;
 
     const plugins = this.createPlugins({ schema: this.view.state.schema });

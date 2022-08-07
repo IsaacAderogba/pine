@@ -8,7 +8,6 @@ export const ExtensionNodes = {
 
 export const ExtensionMarks = {
   strong: "strong",
-  em: "em",
 } as const;
 
 export const ExtensionHooks = {
@@ -17,7 +16,6 @@ export const ExtensionHooks = {
 } as const;
 
 export const ExtensionConverters = {
-  markdown: "markdown",
   dom: "dom",
 } as const;
 
