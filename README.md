@@ -2,14 +2,14 @@
 
 [Pine](https://github.com/IsaacAderogba/pine) is a JavaScript framework for building rich-text editors. It's based on the [Prosemirror](https://prosemirror.net/) toolkit, and emphasizes composability and customizability.
 
-> Importantly, Pine has been built for my own personal use cases and is thus centered on my needs. If you wish to extend its functionality, you're encouraged to fork the package.
-
 Pine’s libraries include the following:
 
-| Library       | Description                                       |
-| ------------- | ------------------------------------------------- |
-| `@pine/core`  | Framework-agnostic API for building text editors. |
-| `@pine/react` | React-bindings for the core library.              |
+| Library                   | Description                                       |
+| ------------------------- | ------------------------------------------------- |
+| `@iaworkspace/pine-core`  | Framework-agnostic API for building text editors. |
+| `@iaworkspace/pine-react` | React-bindings for the core library.              |
+
+> Pine, like many of my projects, has been primarily built for my use cases. If you wish to extend the base functionality, you're encouraged to fork the package.
 
 ## Guides
 
@@ -22,7 +22,7 @@ Pine can be installed either as a standalone core library or as a core library w
 If you are using plain javascript, you can install the library with your preferred package manager.
 
 ```shell
-npm install @pine/core
+npm install @iaworkspace/pine-core
 ```
 
 Install pine core using npm.
@@ -37,7 +37,7 @@ import {
   textNodeExtension,
   baseKeysHookExtension,
   historyHookExtension,
-} from "@pine/core";
+} from "@iaworkspace/pine-core";
 ```
 
 Import the minimum set of extensions for a functioning editor.
@@ -72,7 +72,7 @@ Render the pine instance, passing the target html element and the current editor
 For an improved developer experience, you can install react bindings along with the core library.
 
 ```shell
-npm install @pine/core @pine/react
+npm install @iaworkspace/pine-core @iaworkspace/pine-react
 ```
 
 Install pine core and react using npm.
@@ -82,14 +82,14 @@ Import the necessary modules from `react`, `react-dom`, `@pine/react`, and `@pin
 ```typescript
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { PineEditor, usePine } from "@pine/react";
+import { PineEditor, usePine } from "@iaworkspace/pine-react";
 import {
   docNodeExtension,
   paragraphNodeExtension,
   textNodeExtension,
   baseKeysHookExtension,
   historyHookExtension,
-} from "@pine/core";
+} from "@iaworkspace/pine-core";
 ```
 
 Import the minimum set of extensions for a functioning editor.
